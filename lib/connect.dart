@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hadar/codetransm.dart';
 class Connect extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -168,6 +169,15 @@ class Connect extends StatelessWidget {
     Positioned(
     left: 270,
     top: 233,
+      child: GestureDetector(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => CodeTransm(),
+            ),
+          );
+        },
     child: SizedBox(
     width: 69,
     height: 26,
@@ -180,6 +190,7 @@ class Connect extends StatelessWidget {
     fontSize: 10,
     fontWeight: FontWeight.w600,
     height: 1.5,
+    ),
     ),
     ),
     ),
