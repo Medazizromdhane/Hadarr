@@ -1,6 +1,6 @@
-# hadar
+# AlphaGly
 
-A new Flutter project.
+Application mobile pour la consultation et journalisation détaillé du niveau de glycémie
 
 ## Getting Started
 
