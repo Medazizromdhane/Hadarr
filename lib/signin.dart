@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'signup.dart';
+import 'home.dart';
 class SignIn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -179,10 +180,19 @@ class SignIn extends StatelessWidget {
                           children: [
                             Positioned(
                               left: 0,
-                              top: 0,
+                              top: 0,child: GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => HomePage(),
+                              ),
+                            );
+                          },
                               child: Container(
                                 width: 327,
                                 height: 56,
+
                                 clipBehavior: Clip.hardEdge,
                                 decoration: BoxDecoration(
                                   color: const Color(0xFF199A8E),
@@ -202,6 +212,7 @@ class SignIn extends StatelessWidget {
                                   ),
                                 ),
                               ),
+                            ),
                             ),
                           ],
                         ),
