@@ -1,476 +1,271 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'infosup.dart';
-class SignUp extends StatelessWidget {
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+
+class SignUp extends StatefulWidget {
+  @override
+  _SignUpState createState() => _SignUpState();
+}
+
+class _SignUpState extends State<SignUp> {
+  final _formKey = GlobalKey<FormState>();
+  TextEditingController _nameController = TextEditingController();
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _phoneNumberController = TextEditingController();
+  TextEditingController _emergencyNumberController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
+  TextEditingController _confirmPasswordController = TextEditingController();
+  bool _acceptTerms = false;
+
+  void _submitForm(BuildContext context) {
+    if (_formKey.currentState!.validate()) {
+      // Save form data to variables
+      String name = _nameController.text;
+      String email = _emailController.text;
+      String phoneNumber = _phoneNumberController.text;
+      String emergencyNumber = _emergencyNumberController.text;
+      String password = _passwordController.text;
+
+      // Print form data
+      print('Name: $name');
+      print('Email: $email');
+      print('Phone Number: $phoneNumber');
+      print('Emergency Number: $emergencyNumber');
+      print('Password: $password');
+
+      // Perform API request or other actions with the form data
+      performHTTPRequest();
+
+      // Navigate to the next screen or perform other actions
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => InfoSup()),
+      );
+    }
+  }
+
+  void performHTTPRequest() async {
+    final url = Uri.parse('http://your-api-endpoint.com'); // Replace with your API URL
+
+    // Create the request body
+    Map<String, dynamic> requestBody = {
+      'name': _nameController.text,
+      'email': _emailController.text,
+      'phoneNumber': _phoneNumberController.text,
+      'emergencyNumber': _emergencyNumberController.text,
+      'password': _passwordController.text,
+    };
+
+    final response = await http.post(
+      url,
+      body: json.encode(requestBody),
+      headers: {'Content-Type': 'application/json'},
+    );
+
+    if (response.statusCode == 200) {
+      // Request successful
+      final responseBody = json.decode(response.body);
+      print(responseBody);
+    } else {
+      // Request failed
+      print('Request failed with status: ${response.statusCode}');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Material(
-        type: MaterialType.transparency,
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: SingleChildScrollView(
         child: Container(
-          width: 357,
-          clipBehavior: Clip.hardEdge,
-          decoration: const BoxDecoration(
-            color: Colors.white,
-          ),
-          child: Stack(
-            clipBehavior: Clip.none,
+          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 40),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Positioned(
-                left: 0,
-                top: 0,
-                child: Container(
-                  width: 357,
-                  height: 792,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(40),
-                  ),
-                  child: Stack(
-                    clipBehavior: Clip.none,
-                    children: [
-                      Positioned(
-                        left: -9,
-                        top: 10,
-                        child: Container(
-                          width: 375,
-                          height: 100,
-                          clipBehavior: Clip.hardEdge,
-                          decoration: const BoxDecoration(),
-                        ),
-                      ),
-                      Positioned(
-                        left: 57,
-                        top: 69,
-                        child: Text(
-                          'Création d’un nouveau compte',
-                          textAlign: TextAlign.center,
-                          style: GoogleFonts.getFont(
-                            'Inter',
-                            color: const Color(0xFF101522),
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            height: 1.4,
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        left: 15,
-                        top: 62,
-                        child: Container(
-                          width: 40,
-                          height: 40,
-                          clipBehavior: Clip.hardEdge,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        left: 23,
-                        top: 70,
-                        child: SizedBox.square(
-                          dimension: 24,
-                          child: Stack(
-                            clipBehavior: Clip.none,
-                            children: [
-                              Positioned(
-                                left: 0,
-                                top: 0,
-                                child: Image.network(
-                                  'https://storage.googleapis.com/codeless-dev.appspot.com/uploads%2Fimages%2FDhCzv8XVh75Ub3k6rcXE%2F654d756d74ac500f7bff5543a244330f.png',
-                                  width: 24,
-                                  height: 24,
-                                  fit: BoxFit.contain,
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        left: 11,
-                        top: 140,
-                        child: Container(
-                          width: 327,
-                          height: 56,
-                          clipBehavior: Clip.hardEdge,
-                          decoration: BoxDecoration(
-                            color: const Color(0xFFF9F9FB),
-                            border: Border.all(
-                              color: const Color(0xFFE5E7EB),
-                            ),
-                            borderRadius: BorderRadius.circular(24),
-                          ),
-                          child: Row(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(left: 16, right: 8),
-                                child: Image.network(
-                                  'https://storage.googleapis.com/codeless-dev.appspot.com/uploads%2Fimages%2FDhCzv8XVh75Ub3k6rcXE%2F731262fc1ef2d0e31d84fd4175d39e84.png',
-                                  width: 24,
-                                  height: 24,
-                                  fit: BoxFit.contain,
-                                ),
-                              ),
-                              Expanded(
-                                child: TextFormField(
-                                  decoration: const InputDecoration(
-                                    border: InputBorder.none,
-                                    hintText: 'Nom',
-                                    hintStyle: TextStyle(
-                                      color: Color(0xFFA0A7B0),
-                                      fontSize: 16,
-                                      height: 1.5,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        left: 11,
-                        top: 212,
-                        child: Container(
-                          width: 327,
-                          height: 56,
-                          clipBehavior: Clip.hardEdge,
-                          decoration: BoxDecoration(
-                            color: const Color(0xFFF9F9FB),
-                            border: Border.all(
-                              color: const Color(0xFFE5E7EB),
-                            ),
-                            borderRadius: BorderRadius.circular(24),
-                          ),
-                          child: Row(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(left: 16, right: 8),
-                                child: Image.network(
-                                  'https://storage.googleapis.com/codeless-dev.appspot.com/uploads%2Fimages%2FDhCzv8XVh75Ub3k6rcXE%2F415261dd029f2c4d6499f7aeb710c148.png',
-                                  width: 24,
-                                  height: 24,
-                                  fit: BoxFit.contain,
-                                ),
-                              ),
-                              Expanded(
-                                child: TextFormField(
-                                  decoration: const InputDecoration(
-                                    border: InputBorder.none,
-                                    hintText: 'Email',
-                                    hintStyle: TextStyle(
-                                      color: Color(0xFFA0A7B0),
-                                      fontSize: 16,
-                                      height: 1.5,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        left: 11,
-                        top: 293,
-                        child: Container(
-                          width: 327,
-                          height: 56,
-                          clipBehavior: Clip.hardEdge,
-                          decoration: BoxDecoration(
-                            color: const Color(0xFFF9F9FB),
-                            border: Border.all(
-                              color: const Color(0xFFE5E7EB),
-                            ),
-                            borderRadius: BorderRadius.circular(24),
-                          ),
-                          child: Row(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(left: 16, right: 8),
-                                child: Image.network(
-                                  'https://storage.googleapis.com/codeless-dev.appspot.com/uploads%2Fimages%2FDhCzv8XVh75Ub3k6rcXE%2F731262fc1ef2d0e31d84fd4175d39e84.png',
-                                  width: 24,
-                                  height: 24,
-                                  fit: BoxFit.contain,
-                                ),
-                              ),
-                              Expanded(
-                                child: TextFormField(
-                                  decoration: const InputDecoration(
-                                    border: InputBorder.none,
-                                    hintText: 'Num Téléphone',
-                                    hintStyle: TextStyle(
-                                      color: Color(0xFFA0A7B0),
-                                      fontSize: 16,
-                                      height: 1.5,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        left: 11,
-                        top: 376,
-                        child: SizedBox(
-                          width: 327,
-                          height: 56,
-                          child: Stack(
-                            clipBehavior: Clip.none,
-                            children: [
-                              Positioned(
-                                left: 0,
-                                top: 0,
-                                child: Container(
-                                  width: 327,
-                                  height: 56,
-                                  clipBehavior: Clip.hardEdge,
-                                  decoration: BoxDecoration(
-                                    color: const Color(0xFFF9F9FB),
-                                    border: Border.all(
-                                      color: const Color(0xFFE5E7EB),
-                                    ),
-                                    borderRadius: BorderRadius.circular(24),
-                                  ),
-                                ),
-                              ),
-                              Positioned(
-                                left: 63,
-                                top: 15,
-                                child: Text(
-                                  'Num Téléphone d’un proche',
-                                  style: GoogleFonts.getFont(
-                                    'Inter',
-                                    color: const Color(0xFFA0A7B0),
-                                    fontSize: 16,
-                                    height: 1.5,
-                                  ),
-                                ),
-                              ),
-                              Positioned(
-                                left: 24,
-                                top: 16,
-                                child: SizedBox.square(
-                                  dimension: 24,
-                                  child: Stack(
-                                    clipBehavior: Clip.none,
-                                    children: [
-                                      Positioned(
-                                        left: 0,
-                                        top: 0,
-                                        child: Image.network(
-                                          'https://storage.googleapis.com/codeless-dev.appspot.com/uploads%2Fimages%2FDhCzv8XVh75Ub3k6rcXE%2F731262fc1ef2d0e31d84fd4175d39e84.png',
-                                          width: 24,
-                                          height: 24,
-                                          fit: BoxFit.contain,
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        left: 20,
-                        top: 611,
-                        child: Row(
-                          children: [
-                            Container(
-                              width: 24,
-                              height: 24,
-                              clipBehavior: Clip.hardEdge,
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                border: Border.all(
-                                  width: 1.5,
-                                  color: const Color(0xFFD3D6DA),
-                                ),
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                            ),
-                            const SizedBox(width: 8),
-                            RichText(
-                              textAlign: TextAlign.left,
-                              text: TextSpan(
-                                style: GoogleFonts.getFont(
-                                  'Inter',
-                                  color: const Color(0xFF3B4353),
-                                  fontSize: 13,
-                                  height: 1.4,
-                                ),
-                                children: const [
-                                  TextSpan(text: 'J’accepte les  '),
-                                  TextSpan(
-                                    text: 'conditions d’utilisation',
-                                    style: TextStyle(
-                                      color: Color(0xFF199A8E),
-                                    ),
-                                  ),
-                                  TextSpan(text: ' et '),
-                                  TextSpan(
-                                    text: 'la politique de confidentialité ',
-                                    style: TextStyle(
-                                      color: Color(0xFF199A8E),
-                                    ),
-                                  ),
-                                  TextSpan(text: 'de AlphaGly'),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Positioned(
-                        left: 20,
-                        top: 677,
-                        child: SizedBox(
-                          width: 327,
-                          height: 56,
-                          child: Stack(
-                            clipBehavior: Clip.none,
-                            children: [
-                              Positioned(
-                                left: 0,
-                                top: 0,
-                                child: Container(
-                                  width: 327,
-                                  height: 56,
-                                  clipBehavior: Clip.hardEdge,
-                                  decoration: BoxDecoration(
-                                    color: const Color(0xFF199A8E),
-                                    borderRadius: BorderRadius.circular(32),
-                                  ),
-                                ),
-                              ),
-                              Positioned(
-                                left: 124,
-                                top: 15,
-                                child: GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => InfoSup(),
-                                      ),
-                                    );
-                                  },
-                                child: Text(
-                                  'Continuer',
-                                  textAlign: TextAlign.center,
-                                  style: GoogleFonts.getFont(
-                                    'Inter',
-                                    color: Colors.white,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w600,
-                                    height: 1.5,
-                                  ),
-                                ),
-                              )
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        left: 11,
-                        top: 455,
-                        child: Container(
-                          width: 327,
-                          height: 56,
-                          clipBehavior: Clip.hardEdge,
-                          decoration: BoxDecoration(
-                            color: const Color(0xFFF9F9FB),
-                            border: Border.all(
-                              color: const Color(0xFFE5E7EB),
-                            ),
-                            borderRadius: BorderRadius.circular(24),
-                          ),
-                          child: Row(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(left: 16, right: 8),
-                                child: Image.network(
-                                  'https://storage.googleapis.com/codeless-dev.appspot.com/uploads%2Fimages%2FDhCzv8XVh75Ub3k6rcXE%2F783d34c9dc3ae5c69fd944b46a595362.png',
-                                  width: 24,
-                                  height: 24,
-                                  fit: BoxFit.contain,
-                                ),
-                              ),
-                              Expanded(
-                                child: TextFormField(
-                                  obscureText: true,
-                                  decoration: const InputDecoration(
-                                    border: InputBorder.none,
-                                    hintText: 'Mot de passe',
-                                    hintStyle: TextStyle(
-                                      color: Color(0xFFA0A7B0),
-                                      fontSize: 16,
-                                      height: 1.5,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        left: 11,
-                        top: 525,
-                        child: Container(
-                          width: 327,
-                          height: 56,
-                          clipBehavior: Clip.hardEdge,
-                          decoration: BoxDecoration(
-                            color: const Color(0xFFF9F9FB),
-                            border: Border.all(
-                              color: const Color(0xFFE5E7EB),
-                            ),
-                            borderRadius: BorderRadius.circular(24),
-                          ),
-                          child: Row(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(left: 16, right: 8),
-                                child: Image.network(
-                                  'https://storage.googleapis.com/codeless-dev.appspot.com/uploads%2Fimages%2FDhCzv8XVh75Ub3k6rcXE%2F783d34c9dc3ae5c69fd944b46a595362.png',
-                                  width: 24,
-                                  height: 24,
-                                  fit: BoxFit.contain,
-                                ),
-                              ),
-                              Expanded(
-                                child: TextFormField(
-                                  obscureText: true,
-                                  decoration: const InputDecoration(
-                                    border: InputBorder.none,
-                                    hintText: 'Re-tapez votre mot de passe',
-                                    hintStyle: TextStyle(
-                                      color: Color(0xFFA0A7B0),
-                                      fontSize: 16,
-                                      height: 1.5,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
+              GestureDetector(
+                onTap: () {
+                  Navigator.pop(context);
+                },
+                child: Icon(
+                  Icons.arrow_back,
+                  color: Colors.black,
                 ),
-              )
+              ),
+              SizedBox(height: 20),
+              Text(
+                'Création d’un nouveau compte',
+                style: GoogleFonts.getFont(
+                  'Inter',
+                  color: const Color(0xFF101522),
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  height: 1.4,
+                ),
+              ),
+              SizedBox(height: 40),
+              Form(
+                key: _formKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    TextFormField(
+                      controller: _nameController,
+                      decoration: InputDecoration(
+                        labelText: 'Nom',
+                        prefixIcon: Icon(Icons.person),
+                      ),
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'Veuillez entrer votre nom';
+                        }
+                        return null;
+                      },
+                    ),
+                    SizedBox(height: 20),
+                    TextFormField(
+                      controller: _emailController,
+                      decoration: InputDecoration(
+                        labelText: 'Email',
+                        prefixIcon: Icon(Icons.email),
+                      ),
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'Veuillez entrer votre email';
+                        }
+                        // Add email validation if needed
+                        return null;
+                      },
+                    ),
+                    SizedBox(height: 20),
+                    TextFormField(
+                      controller: _phoneNumberController,
+                      decoration: InputDecoration(
+                        labelText: 'Num Téléphone',
+                        prefixIcon: Icon(Icons.phone),
+                      ),
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'Veuillez entrer votre numéro de téléphone';
+                        }
+                        // Add phone number validation if needed
+                        return null;
+                      },
+                    ),
+                    SizedBox(height: 20),
+                    TextFormField(
+                      controller: _emergencyNumberController,
+                      decoration: InputDecoration(
+                        labelText: 'Num Téléphone d’un proche',
+                        prefixIcon: Icon(Icons.phone),
+                      ),
+                    ),
+                    SizedBox(height: 20),
+                    TextFormField(
+                      controller: _passwordController,
+                      obscureText: true,
+                      decoration: InputDecoration(
+                        labelText: 'Mot de passe',
+                        prefixIcon: Icon(Icons.lock),
+                      ),
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'Veuillez entrer votre mot de passe';
+                        }
+                        // Add password validation if needed
+                        return null;
+                      },
+                    ),
+                    SizedBox(height: 20),
+                    TextFormField(
+                      controller: _confirmPasswordController,
+                      obscureText: true,
+                      decoration: InputDecoration(
+                        labelText: 'Re-tapez votre mot de passe',
+                        prefixIcon: Icon(Icons.lock),
+                      ),
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'Veuillez confirmer votre mot de passe';
+                        } else if (value != _passwordController.text) {
+                          return 'Les mots de passe ne correspondent pas';
+                        }
+                        return null;
+                      },
+                    ),
+                    SizedBox(height: 40),
+                    Row(
+                      children: [
+                        Checkbox(
+                          value: _acceptTerms,
+                          onChanged: (value) {
+                            setState(() {
+                              _acceptTerms = value!;
+                            });
+                          },
+                        ),
+                        Expanded(
+                          child: RichText(
+                            text: TextSpan(
+                              style: GoogleFonts.getFont(
+                                'Inter',
+                                color: const Color(0xFF3B4353),
+                                fontSize: 13,
+                                height: 1.4,
+                              ),
+                              children: [
+                                TextSpan(text: 'J’accepte les  '),
+                                TextSpan(
+                                  text: 'conditions d’utilisation',
+                                  style: TextStyle(
+                                    color: Color(0xFF199A8E),
+                                  ),
+                                ),
+                                TextSpan(text: ' et '),
+                                TextSpan(
+                                  text: 'la politique de confidentialité ',
+                                  style: TextStyle(
+                                    color: Color(0xFF199A8E),
+                                  ),
+                                ),
+                                TextSpan(text: 'de AlphaGly'),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 40),
+                    Center(
+                      child: ElevatedButton(
+                        onPressed: () {
+                          _submitForm(context);
+                        },
+                        style: ElevatedButton.styleFrom(
+                          primary: const Color(0xFF199A8E),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(32),
+                          ),
+                          minimumSize: Size(200, 56),
+                        ),
+                        child: Text(
+                          'Continuer',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ],
           ),
-        )
+        ),
+      ),
     );
   }
 }
