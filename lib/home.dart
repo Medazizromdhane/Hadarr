@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hadar/doctors.dart';
 import 'notifications.dart';
 import "dart:math" show pi;
+import "package:hadar/device.dart";
 class HomePage extends StatelessWidget {
+
   @override
+
   Widget build(BuildContext context) {
     return Scaffold(
         body:Container(
@@ -344,7 +348,17 @@ class HomePage extends StatelessWidget {
                       Positioned(
                         left: 280,
                         top: 774,
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => Device(),
+                              ),
+                            );
+                          },
                         child: SizedBox(
+
                           width: 62,
                           height: 15,
                           child: Text(
@@ -355,6 +369,7 @@ class HomePage extends StatelessWidget {
                               fontSize: 10,
                             ),
                           ),
+                        ),
                         ),
                       ),
                       Positioned(
@@ -835,7 +850,17 @@ class HomePage extends StatelessWidget {
                         child: SizedBox(
                           width: 208,
                           height: 46,
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => Doctors(),
+                                ),
+                              );
+                            },
                           child: Text(
+
                             'Discutez dès maintenant  avec un médecin ',
                             style: GoogleFonts.getFont(
                               'Inter',
@@ -843,6 +868,7 @@ class HomePage extends StatelessWidget {
                               fontSize: 15,
                               fontWeight: FontWeight.w600,
                             ),
+                          ),
                           ),
                         ),
                       ),
@@ -854,20 +880,9 @@ class HomePage extends StatelessWidget {
                           height: 24,
                           clipBehavior: Clip.hardEdge,
                           decoration: const BoxDecoration(),
-                          child: Stack(
+                          child: const Stack(
                             clipBehavior: Clip.none,
-                            children: [
-                              Positioned(
-                                left: 2,
-                                top: 2,
-                                child: Image.network(
-                                  'https://storage.googleapis.com/codeless-dev.appspot.com/uploads%2Fimages%2FDhCzv8XVh75Ub3k6rcXE%2F95d1e33acdf1cf3879d9f22176a483e7.png',
-                                  width: 20,
-                                  height: 20,
-                                  fit: BoxFit.contain,
-                                ),
-                              )
-                            ],
+
                           ),
                         ),
                       ),

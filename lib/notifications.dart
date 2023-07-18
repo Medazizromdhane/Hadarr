@@ -1,6 +1,7 @@
 import "dart:math" show pi;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hadar/device.dart';
 import 'home.dart';
 class Notificiations extends StatelessWidget {
   @override
@@ -977,6 +978,15 @@ class Notificiations extends StatelessWidget {
                     Positioned(
                       left: 282,
                       top: 772,
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Device(),
+                            ),
+                          );
+                        },
                       child: SizedBox(
                         width: 62,
                         height: 15,
@@ -988,6 +998,7 @@ class Notificiations extends StatelessWidget {
                             fontSize: 10,
                           ),
                         ),
+                      ),
                       ),
                     ),
                     Positioned(

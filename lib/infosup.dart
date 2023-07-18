@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'connect.dart';
+import 'package:hadar/codetransm.dart';
+import 'package:hadar/connect.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class InfoSup extends StatefulWidget {
   @override
@@ -11,6 +14,63 @@ class _InfoSupState extends State<InfoSup> {
   String selectedGender = '';
   double selectedHeight = 100;
   double selectedWeight = 50;
+
+  TextEditingController _selectedGenderController = TextEditingController();
+  TextEditingController _selectedHeightController = TextEditingController();
+  TextEditingController _selectedWeightController = TextEditingController();
+
+  void _submitForm(BuildContext context) {
+    // Save form data to variables
+    String selectedGender = _selectedGenderController.text;
+    String selectedHeight = _selectedHeightController.text;
+    String selectedWeight = _selectedWeightController.text;
+
+    // Print form data
+    print('Selected Gender: $selectedGender');
+    print('Selected Height: $selectedHeight');
+    print('Selected Weight: $selectedWeight');
+
+    // Perform API request or other actions with the form data
+    performHTTPRequest();
+
+    // Navigate to the next screen or perform other actions
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => Connect()),
+    );
+  }
+
+  void performHTTPRequest() async {
+    final url = Uri.parse('http://your-api-url.com'); // Replace with your API URL
+    // Create the request body
+    Map<String, dynamic> requestBody = {
+      'gender': _selectedGenderController.text,
+      'height': _selectedHeightController.text,
+      'weight': _selectedWeightController.text,
+    };
+
+    final response = await http.post(
+      url,
+      body: json.encode(requestBody),
+      headers: {'Content-Type': 'application/json'},
+    );
+
+    if (response.statusCode == 200) {
+      // Request successful
+      final responseBody = json.decode(response.body);
+      print(responseBody);
+    } else {
+      // Request failed
+      print('Request failed with status: ${response.statusCode}');
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedHeightController.text = selectedHeight.toString();
+    _selectedWeightController.text = selectedWeight.toString();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -64,6 +124,7 @@ class _InfoSupState extends State<InfoSup> {
                     onTap: () {
                       setState(() {
                         selectedGender = 'Homme';
+                        _selectedGenderController.text = 'Homme';
                       });
                     },
                     child: Container(
@@ -87,6 +148,7 @@ class _InfoSupState extends State<InfoSup> {
                     onTap: () {
                       setState(() {
                         selectedGender = 'Femme';
+                        _selectedGenderController.text = 'Femme';
                       });
                     },
                     child: Container(
@@ -128,6 +190,7 @@ class _InfoSupState extends State<InfoSup> {
               onChanged: (value) {
                 setState(() {
                   selectedHeight = value;
+                  _selectedHeightController.text = value.toStringAsFixed(0);
                 });
               },
             ),
@@ -161,6 +224,7 @@ class _InfoSupState extends State<InfoSup> {
               onChanged: (value) {
                 setState(() {
                   selectedWeight = value;
+                  _selectedWeightController.text = value.toStringAsFixed(0);
                 });
               },
             ),
@@ -186,13 +250,7 @@ class _InfoSupState extends State<InfoSup> {
                 ),
                 child: TextButton(
                   onPressed: () {
-                    // Handle button press
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => Connect(),
-                      ),
-                    );
+                    _submitForm(context);
                   },
                   child: Text(
                     'Continuer',

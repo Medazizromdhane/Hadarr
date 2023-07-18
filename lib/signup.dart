@@ -47,7 +47,7 @@ class _SignUpState extends State<SignUp> {
   }
 
   void performHTTPRequest() async {
-    final url = Uri.parse('http://your-api-endpoint.com'); // Replace with your API URL
+    final url = Uri.parse('test'); // Replace with your API URL
 
     // Create the request body
     Map<String, dynamic> requestBody = {
@@ -55,19 +55,25 @@ class _SignUpState extends State<SignUp> {
       'email': _emailController.text,
       'phoneNumber': _phoneNumberController.text,
       'emergencyNumber': _emergencyNumberController.text,
+      'roles': [
+        {
+          "name": "ROLE_PATIENT"
+        }
+      ],
       'password': _passwordController.text,
     };
 
+    // Send the HTTP request
     final response = await http.post(
       url,
-      body: json.encode(requestBody),
       headers: {'Content-Type': 'application/json'},
+      body: jsonEncode(requestBody),
     );
 
+    // Handle the response
     if (response.statusCode == 200) {
       // Request successful
-      final responseBody = json.decode(response.body);
-      print(responseBody);
+      print('Request successful');
     } else {
       // Request failed
       print('Request failed with status: ${response.statusCode}');
