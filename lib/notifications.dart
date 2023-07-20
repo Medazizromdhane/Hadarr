@@ -2,6 +2,8 @@ import "dart:math" show pi;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hadar/device.dart';
+import 'package:hadar/journal.dart';
+import 'package:hadar/notifications.dart';
 import 'home.dart';
 class Notificiations extends StatelessWidget {
   @override
@@ -814,13 +816,23 @@ class Notificiations extends StatelessWidget {
                       child: SizedBox(
                         width: 39,
                         height: 11,
-                        child: Text(
+                        child:
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => HomePage(),
+                              ),
+                            );
+                          },child:Text(
                           'Accueil',
                           style: GoogleFonts.getFont(
                             'Inter',
                             color: const Color(0xFF999999),
                             fontSize: 10,
                           ),
+                        ),
                         ),
                       ),
                     ),
@@ -829,13 +841,23 @@ class Notificiations extends StatelessWidget {
                       top: 773,
                       child: SizedBox(
                         height: 15,
-                        child: Text(
+                        child:
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => Notificiations(),
+                              ),
+                            );
+                          },child:Text(
                           'Notifications',
                           style: GoogleFonts.getFont(
                             'Inter',
                             color: const Color(0xFF999999),
                             fontSize: 10,
                           ),
+                        ),
                         ),
                       ),
                     ),
@@ -845,13 +867,23 @@ class Notificiations extends StatelessWidget {
                       child: SizedBox(
                         width: 45,
                         height: 15,
-                        child: Text(
+                        child:
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => Journal(),
+                              ),
+                            );
+                          },child:Text(
                           'Journal',
                           style: GoogleFonts.getFont(
                             'Inter',
                             color: const Color(0xFF999999),
                             fontSize: 10,
                           ),
+                        ),
                         ),
                       ),
                     ),
@@ -870,7 +902,7 @@ class Notificiations extends StatelessWidget {
                               child: Opacity(
                                 opacity: 0.7,
                                 child: Image.network(
-                                  'https://firebasestorage.googleapis.com/v0/b/codeless-app.appspot.com/o/projects%2FDhCzv8XVh75Ub3k6rcXE%2F498c46003c9b34245f7eae6849d6d038b94cd575?alt=media&token=61c1f30f-f7d3-4652-b4a0-175652637c76',
+                                  'https://firebasestorage.googleapis.com/v0/b/codeless-app.appspot.com/o/projects%2FDhCzv8XVh75Ub3k6rcXE%2Feffdef2da41ac066faf287f5abd3097ec49d5e60?alt=media&token=0efbd4f7-ac95-405b-9f88-1a7e73b919a3',
                                   width: 22,
                                   height: 22,
                                   fit: BoxFit.contain,

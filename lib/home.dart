@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hadar/doctors.dart';
+import 'package:hadar/journal.dart';
 import 'notifications.dart';
 import "dart:math" show pi;
 import "package:hadar/device.dart";
@@ -69,6 +70,7 @@ class HomePage extends StatelessWidget {
                       Positioned(
                         left: 32,
                         top: 116,
+
                         child: Container(
                           width: 304,
                           height: 154,
@@ -79,6 +81,7 @@ class HomePage extends StatelessWidget {
                           ),
                         ),
                       ),
+
                       Positioned(
                         left: 125,
                         top: 236,
@@ -162,11 +165,21 @@ class HomePage extends StatelessWidget {
                       Positioned(
                         left: 303,
                         top: 127,
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => Journal(),
+                              ),
+                            );
+                          },
                         child: Image.network(
                           'https://firebasestorage.googleapis.com/v0/b/codeless-app.appspot.com/o/projects%2FDhCzv8XVh75Ub3k6rcXE%2Fa9764b4ec39109117c7b1b98c5466accaf624ead?alt=media&token=00bacec7-8a1b-499c-9983-c5d97f09056b',
                           width: 25,
                           height: 25,
                           fit: BoxFit.contain,
+                        ),
                         ),
                       ),
                       Positioned(
@@ -305,13 +318,23 @@ class HomePage extends StatelessWidget {
                         child: SizedBox(
                           width: 45,
                           height: 15,
-                          child: Text(
+                          child:
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => Journal(),
+                                ),
+                              );
+                            },child:Text(
                             'Journal',
                             style: GoogleFonts.getFont(
                               'Inter',
                               color: const Color(0xFF999999),
                               fontSize: 10,
                             ),
+                          ),
                           ),
                         ),
                       ),

@@ -65,11 +65,18 @@ class SignIn extends StatelessWidget {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        child: Image.network(
+                        child:GestureDetector(
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+
+
+                        child:Image.network(
                           'https://storage.googleapis.com/codeless-dev.appspot.com/uploads%2Fimages%2FDhCzv8XVh75Ub3k6rcXE%2F654d756d74ac500f7bff5543a244330f.png',
                           width: 40,
                           height: 40,
                           fit: BoxFit.contain,
+                        ),
                         ),
                       ),
                     ),

@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hadar/chatbot.dart';
+import 'package:hadar/doctorinfos.dart';
 import "dart:math" show pi;
 import 'package:hadar/notifications.dart';
 import 'package:hadar/home.dart';
+
+import 'device.dart';
 class Doctors extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
@@ -133,7 +136,16 @@ class Doctors extends StatelessWidget{
                         child: SizedBox(
                           width: 62,
                           height: 15,
-                          child: Text(
+
+                          child: GestureDetector(
+                            onTap: () {
+                      Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                      builder: (context) => Device(),
+                      ),
+                      );
+                      },child: Text(
                             'Appareil\n',
                             style: GoogleFonts.getFont(
                               'Inter',
@@ -141,6 +153,7 @@ class Doctors extends StatelessWidget{
                               fontSize: 10,
                             ),
                           ),
+                        ),
                         ),
                       ),
                       Positioned(
@@ -368,29 +381,7 @@ class Doctors extends StatelessWidget{
                           ),
                         ),
                       ),
-                      Positioned(
-                        left: 20,
-                        top: 365,
-                        child: SizedBox(
-                          width: 87,
-                          height: 11,
-                          child: Stack(
-                            clipBehavior: Clip.none,
-                            children: [
-                              Positioned(
-                                left: 0,
-                                top: 0,
-                                child: Image.network(
-                                  'https://storage.googleapis.com/codeless-dev.appspot.com/uploads%2Fimages%2FDhCzv8XVh75Ub3k6rcXE%2F59cd9e8c21bb9dfa6e0d671e897ed172.png',
-                                  width: 87,
-                                  height: 11,
-                                  fit: BoxFit.contain,
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
+
                       Positioned(
                         left: 0,
                         top: 604,
@@ -444,7 +435,7 @@ class Doctors extends StatelessWidget{
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => HomePage(),
+                                  builder: (context) => DoctorsInfo(),
                                 ),
                               );
                             },
