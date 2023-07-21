@@ -288,22 +288,18 @@ class DoctorsInfo extends StatelessWidget {
                     );
                   },
                   child: buildNavbarItem(
-                    iconUrl:
-                    'https://firebasestorage.googleapis.com/v0/b/codeless-app.appspot.com/o/projects%2FDhCzv8XVh75Ub3k6rcXE%2F498c46003c9b34245f7eae6849d6d038b94cd575?alt=media&token=89099951-5ef7-45fe-b8f9-4944f2e02dfc',
+                    iconUrl: 'https://firebasestorage.googleapis.com/v0/b/codeless-app.appspot.com/o/projects%2FDhCzv8XVh75Ub3k6rcXE%2Feffdef2da41ac066faf287f5abd3097ec49d5e60?alt=media&token=623ac065-47aa-4a12-916b-5e3debd0561c',
                     title: 'Accueil',
                   ),
                 ),
                 GestureDetector(
                   onTap: () {
                     // Handle navigation to Journal Page
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => Journal()),
-                    );
+
                   },
                   child: buildNavbarItem(
-                    iconUrl:
-                    'https://firebasestorage.googleapis.com/v0/b/codeless-app.appspot.com/o/projects%2FDhCzv8XVh75Ub3k6rcXE%2F9fa0b2763a613dcfd8dd0b4212d11eb9d8e94c62?alt=media&token=d3ee03bc-5355-4ccc-8f5c-fd57f5aeeafb',
+                    iconUrl: 'https://firebasestorage.googleapis.com/v0/b/codeless-app.appspot.com/o/projects%2FDhCzv8XVh75Ub3k6rcXE%2F3f16f9026e0f93dd65b617e082c70c6329696321?alt=media&token=54d7675f-0541-4be1-9df4-85e0ab5bd8ae',
+
                     title: 'Journal',
                   ),
                 ),

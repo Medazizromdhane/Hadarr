@@ -868,22 +868,19 @@ class Notifications extends StatelessWidget {
                       },
                       child: buildNavbarItem(
 
-                        iconUrl: 'https://firebasestorage.googleapis.com/v0/b/codeless-app.appspot.com/o/projects%2FDhCzv8XVh75Ub3k6rcXE%2F3f16f9026e0f93dd65b617e082c70c6329696321?alt=media&token=54d7675f-0541-4be1-9df4-85e0ab5bd8ae',
+iconUrl:                        'https://firebasestorage.googleapis.com/v0/b/codeless-app.appspot.com/o/projects%2FDhCzv8XVh75Ub3k6rcXE%2F9fa0b2763a613dcfd8dd0b4212d11eb9d8e94c62?alt=media&token=d3ee03bc-5355-4ccc-8f5c-fd57f5aeeafb',
                         title: 'Journal',
                       ),
                     ),
                     GestureDetector(
                       onTap: () {
                         // Handle navigation to Notifications Page
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => Notifications()),
-                        );
+
+
                       },
                       child: buildNavbarItem(
                         iconUrl:
-                        'https://firebasestorage.googleapis.com/v0/b/codeless-app.appspot.com/o/projects%2FDhCzv8XVh75Ub3k6rcXE%2F4621a2ffbd02508f88be529e93bb1e7424115a10?alt=media&token=f3b86aaa-0a76-4ae4-b955-82bd434caf31',
+                        'https://firebasestorage.googleapis.com/v0/b/codeless-app.appspot.com/o/JG9nPX0jK9XSmvjagLhvnIJwZ1F2%2Fuploads%2Fimages%2Ffdc2eea0_27a2_11ee_b327_6b7fc76faf4d_icons8_notification_64.png?alt=media',
                         title: 'Notifications',
                       ),
                     ),

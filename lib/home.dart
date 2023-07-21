@@ -747,10 +747,7 @@ class HomePage extends StatelessWidget {
                     GestureDetector(
                       onTap: () {
                         // Handle navigation to HomePage
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => HomePage()),
-                        );
+
                       },
                       child: buildNavbarItem(
                         iconUrl:

@@ -379,10 +379,7 @@ class Journal extends StatelessWidget {
                     GestureDetector(
                       onTap: () {
                         // Handle navigation to Journal Page
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => Journal()),
-                        );
+
                       },
                       child: buildNavbarItem(
 
