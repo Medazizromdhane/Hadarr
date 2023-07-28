@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:draw_graph/draw_graph.dart';
+import 'package:draw_graph/models/feature.dart';
 import 'dart:math' show pi;
 
 import 'device.dart';
@@ -13,7 +15,19 @@ class Dialyse extends StatelessWidget {
     final double screenWidth = MediaQuery.of(context).size.width;
     final double canvasWidth = 357;
     final double viewRatio = canvasWidth / 792; // Adjust this value if needed
+    final List<Feature> features = [
+      Feature(
+        title: "Drink Water",
+        color: Colors.blue,
+        data: [0.2, 0.8, 0.4, 0.7, 0.6],
+      ),
+      Feature(
+        title: "Exercise",
+        color: Colors.pink,
+        data: [1, 0.8, 0.6, 0.7, 0.3],
+      ),
 
+    ];
     return Scaffold(
       body: Container(
         width: canvasWidth,
@@ -99,7 +113,7 @@ class Dialyse extends StatelessWidget {
                       left: 115,
                       top: 70,
                       child: Text(
-                        'Analyse du jour',
+                        'Analyse Instantanée',
                         textAlign: TextAlign.center,
                         style: GoogleFonts.getFont(
                           'Inter',
@@ -149,63 +163,20 @@ class Dialyse extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Positioned(
-                      left: 46,
-                      top: 144,
-                      child: Image.network(
-                        'https://firebasestorage.googleapis.com/v0/b/codeless-app.appspot.com/o/projects%2FDhCzv8XVh75Ub3k6rcXE%2Fae737617fc596f22a98194b6f1774cc3ddb9e178?alt=media&token=e675bbe0-3c7c-4be7-831e-a68f83b411ab',
-                        width: 273,
-                        height: 120,
-                        fit: BoxFit.cover,
-                      ),
+
+                   //PLOT HERE THE GRAPH
+                Positioned(
+                  bottom: 250,
+                  left: 0,
+                    child:LineGraph(
+                      features: features,
+                      size: Size(352, 450),
+                      labelX: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6'],
+                      labelY: ['25%', '45%', '65%', '75%', '85%', '100%'],
+                      showDescription: true ,
+                      graphColor: Colors.black87,
                     ),
-                    Positioned(
-                      left: 46,
-                      top: 303,
-                      child: Image.network(
-                        'https://firebasestorage.googleapis.com/v0/b/codeless-app.appspot.com/o/projects%2FDhCzv8XVh75Ub3k6rcXE%2Fae737617fc596f22a98194b6f1774cc3ddb9e178?alt=media&token=2a64b40a-7b86-4a41-93ba-eb94c9e5043a',
-                        width: 278,
-                        height: 124,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    Positioned(
-                      left: 20,
-                      top: 122,
-                      child: SizedBox(
-                        height: 23,
-                        child: Text(
-                          'Taux de glucose',
-                          textAlign: TextAlign.center,
-                          style: GoogleFonts.getFont(
-                            'Poppins',
-                            color: Colors.black,
-                            fontSize: 17,
-                            fontWeight: FontWeight.w500,
-                            height: 1.3,
-                          ),
-                        ),
-                      ),
-                    ),
-                    Positioned(
-                      left: 3,
-                      top: 280,
-                      child: SizedBox(
-                        width: 199,
-                        height: 24,
-                        child: Text(
-                          'Taux d’insuline actif',
-                          textAlign: TextAlign.center,
-                          style: GoogleFonts.getFont(
-                            'Poppins',
-                            color: Colors.black,
-                            fontSize: 17,
-                            fontWeight: FontWeight.w500,
-                            height: 1.3,
-                          ),
-                        ),
-                      ),
-                    ),
+                ),
                   ],
                 ),
               ),

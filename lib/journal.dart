@@ -89,9 +89,9 @@ class Journal extends StatelessWidget {
                                     },
 
                                     child: Image.network(
-                                      'https://storage.googleapis.com/codeless-dev.appspot.com/uploads%2Fimages%2FDhCzv8XVh75Ub3k6rcXE%2F654d756d74ac500f7bff5543a244330f.png',
-                                      width: 24,
-                                      height: 24,
+                                      'https://firebasestorage.googleapis.com/v0/b/codeless-app.appspot.com/o/JG9nPX0jK9XSmvjagLhvnIJwZ1F2%2Fuploads%2Fimages%2F8929b6a0_2ba3_11ee_b728_0348c33fb45b_sans_titre.png?alt=media',
+                                      width: 602,
+                                      height: 282,
                                       fit: BoxFit.contain,
                                     ),
                                   ),
@@ -100,11 +100,17 @@ class Journal extends StatelessWidget {
                               Positioned(
                                 left: -1,
                                 top: 200,
-                                child: Image.network(
-                                  'https://firebasestorage.googleapis.com/v0/b/codeless-app.appspot.com/o/projects%2FDhCzv8XVh75Ub3k6rcXE%2Fa1c05847690b14079b9e72c355915308c568b2b6?alt=media&token=6aea0ceb-17d0-4741-84e3-6eb245526771',
-                                  width: 358,
-                                  height: 392,
-                                  fit: BoxFit.cover,
+                                child:GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(context, MaterialPageRoute(builder: (_) {
+                                      return FullScreenImage();
+                                    }));
+                                  }, child:Image.network(
+                                  'https://firebasestorage.googleapis.com/v0/b/codeless-app.appspot.com/o/JG9nPX0jK9XSmvjagLhvnIJwZ1F2%2Fuploads%2Fimages%2F5d216820_2ba6_11ee_946f_5f2919a44104_now.png?alt=media',
+                                  width: 398,
+                                  height: 196,
+                                  fit: BoxFit.contain,
+                                ),
                                 ),
                               ),
                               Positioned(
@@ -452,6 +458,27 @@ class Journal extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+}
+class FullScreenImage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.black,
+      body: GestureDetector(
+        onTap: () {
+          Navigator.pop(context); // Go back when tapped
+        },
+        child: Center(
+          child: Hero(
+            tag: 'your_image_tag', // Same tag as the one used in the previous screen
+            child: Image.network(
+              'https://firebasestorage.googleapis.com/v0/b/codeless-app.appspot.com/o/JG9nPX0jK9XSmvjagLhvnIJwZ1F2%2Fuploads%2Fimages%2F5d216820_2ba6_11ee_946f_5f2919a44104_now.png?alt=media',
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

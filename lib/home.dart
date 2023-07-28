@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:url_launcher/url_launcher.dart';
 import "dart:math" show pi;
 import 'doctors.dart';
 import 'journal.dart'; // Import the Journal page
@@ -502,9 +504,18 @@ class HomePage extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            const Positioned(
+                            Positioned(
                               left: 192,
                               top: 305,
+                              child: GestureDetector(
+                                onTap: () async {
+                                  // Replace with your desired phone number
+                                  String phoneNumber = "+21652332007";
+                                  bool? res = await FlutterPhoneDirectCaller.callNumber(phoneNumber);
+                                  if (!res!) {
+                                    throw 'Could not make phone call';
+                                  }
+                                },
                               child: SizedBox(
                                 width: 82,
                                 height: 28,
@@ -518,10 +529,20 @@ class HomePage extends StatelessWidget {
                                   ),
                                 ),
                               ),
+                              ),
                             ),
-                            const Positioned(
+                            Positioned(
                               left: 207,
                               top: 344,
+                              child: GestureDetector(
+                                onTap: () async {
+                                  // Replace with your desired phone number
+                                  String phoneNumber = "+21652332007";
+                                  bool? res = await FlutterPhoneDirectCaller.callNumber(phoneNumber);
+                                  if (!res!) {
+                                    throw 'Could not make phone call';
+                                  }
+                                },
 
 
 
@@ -537,7 +558,7 @@ class HomePage extends StatelessWidget {
                                 maxLines: 2, // Adjust the number of lines as needed
                                 overflow: TextOverflow.ellipsis, // Display ellipsis (...) for overflowed text
                               ),
-
+                              ),
 
                             ),
                             Positioned(
@@ -553,12 +574,21 @@ class HomePage extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            const Positioned(
+                            Positioned(
                               left: 186,
                               top: 402,
                               child: SizedBox(
                                 width: 136,
                                 height: 41,
+                                child: GestureDetector(
+                                  onTap: () async {
+                                    // Replace with your desired phone number
+                                    String phoneNumber = "+21652332007";
+                                    bool? res = await FlutterPhoneDirectCaller.callNumber(phoneNumber);
+                                    if (!res!) {
+                                      throw 'Could not make phone call';
+                                    }
+                                  },
                                 child: Text(
                                   'Intervention médicale\nurgente',
                                   textAlign: TextAlign.center,
@@ -567,6 +597,7 @@ class HomePage extends StatelessWidget {
                                     fontSize: 12,
                                     fontFamily: 'Roboto',
                                   ),
+                                ),
                                 ),
                               ),
                             ),
@@ -697,13 +728,16 @@ class HomePage extends StatelessWidget {
                                     Positioned(
                                       left: 2,
                                       top: 2,
-                                      child: Image.network(
-                                        'https://storage.googleapis.com/codeless-dev.appspot.com/uploads%2Fimages%2FDhCzv8XVh75Ub3k6rcXE%2Fb41dec475370d88225576adf0d2dc804.png',
-                                        width: 20,
-                                        height: 20,
-                                        fit: BoxFit.contain,
-                                      ),
-                                    )
+
+                                        child: Image.network(
+                                          'https://storage.googleapis.com/codeless-dev.appspot.com/uploads%2Fimages%2FDhCzv8XVh75Ub3k6rcXE%2Fb41dec475370d88225576adf0d2dc804.png',
+                                          width: 20,
+                                          height: 20,
+                                          fit: BoxFit.contain,
+                                        ),
+
+                                    ),
+
                                   ],
                                 ),
                               ),

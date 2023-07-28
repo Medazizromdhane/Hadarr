@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'connect.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 class CodeTransm extends StatefulWidget {
   @override
@@ -11,6 +12,9 @@ class CodeTransm extends StatefulWidget {
 
 class _CodeTransmState extends State<CodeTransm> {
   TextEditingController _codeController = TextEditingController();
+  final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
+  QRViewController? controller;
+  String qrText = '';
 
   void performHTTPRequest() async {
     final url = Uri.parse('http://your-api-url.com'); // Replace with your API URL
@@ -38,14 +42,14 @@ class _CodeTransmState extends State<CodeTransm> {
   @override
   void dispose() {
     _codeController.dispose();
+    controller?.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      type: MaterialType.transparency,
-      child: Container(
+    return Scaffold(
+      body: Container(
         width: 357,
         clipBehavior: Clip.hardEdge,
         decoration: const BoxDecoration(
@@ -165,8 +169,27 @@ class _CodeTransmState extends State<CodeTransm> {
                       ),
                     ),
                     Positioned(
+                      left: 20,
+                      top: 630,
+                      child: SizedBox(
+                        width: 317,
+                        height: 317,
+                        child: QRView(
+                          key: qrKey,
+                          onQRViewCreated: (controller) {
+                            this.controller = controller;
+                            controller.scannedDataStream.listen((scanData) {
+                              setState(() {
+                                qrText = scanData.code!;
+                              });
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+                    Positioned(
                       left: 16,
-                      top: 450,
+                      top: 520,
                       child: Container(
                         width: 325,
                         height: 56,
@@ -177,7 +200,8 @@ class _CodeTransmState extends State<CodeTransm> {
                         child: TextField(
                           controller: _codeController,
                           decoration: InputDecoration(
-                            contentPadding: const EdgeInsets.symmetric(horizontal: 16),
+                            contentPadding:
+                            const EdgeInsets.symmetric(horizontal: 16),
                             hintText: 'Enter your code',
                             hintStyle: TextStyle(color: Colors.white),
                             border: InputBorder.none,
@@ -188,7 +212,15 @@ class _CodeTransmState extends State<CodeTransm> {
                     ),
                     Positioned(
                       left: 16,
-                      top: 520,
+                      top: 600,
+                      child: Text(
+                        'Detected QR Code: $qrText',
+                        style: TextStyle(color: Colors.black),
+                      ),
+                    ),
+                    Positioned(
+                      left: 16,
+                      top: 680,
                       child: Container(
                         width: 325,
                         height: 56,

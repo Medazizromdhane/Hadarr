@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hadar/chatbot.dart';
 
 import 'device.dart';
 import 'doctorinfos.dart';
@@ -263,8 +264,16 @@ class Doctors extends StatelessWidget {
                 child: SizedBox(
                   width: 184,
                   height: 22,
-                  child: Text(
-                    'Prendre rendez-vous',
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ChatBot(),
+                        ),
+                      );
+                    },child:Text(
+                    'Assistance en ligne',
                     textAlign: TextAlign.center,
                     style: GoogleFonts.getFont(
                       'Poppins',
@@ -272,6 +281,7 @@ class Doctors extends StatelessWidget {
                       fontSize: 15,
                       fontWeight: FontWeight.bold,
                     ),
+                  ),
                   ),
                 ),
               ),
